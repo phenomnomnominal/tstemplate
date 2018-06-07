@@ -1,0 +1,60 @@
+{
+  "name": "@phenomnomnominal/tstemplate",
+  "version": "0.1.0",
+  "description": "Generate TypeScript code with the estemplate API!",
+  "main": "dist/src/index.js",
+  "typings": "dist/src/index.d.ts",
+  "author": "Craig Spence <craigspence0@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phenomnomnominal/tstemplate"
+  },
+  "license": "MIT",
+  "scripts": {
+    "compile": "tsc",
+    "lint": "npm run lint:src && npm run lint:test",
+    "lint:src": "tslint --project ./tsconfig.json -c ./tslint.json 'src/**/*.ts'",
+    "lint:test": "tslint --project ./tsconfig.json -c ./tslint.json 'test/**/*.ts'",
+    "lint:fix": "npm run lint:src:fix && npm run lint:test",
+    "lint:src:fix": "tslint -c tslint.json 'src/**/*.ts' --fix",
+    "lint:test:fix": "tslint -c tslint.json 'test/**/*.ts' --fix",
+    "test": "jest",
+    "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
+    "build": "npm run compile && npm run lint && npm run test",
+    "prepublishOnly": "rm -rf dist && npm run build"
+  },
+  "devDependencies": {
+    "@phenomnomnominal/tsquery": "^2.0.0-beta.2",
+    "@types/chai": "^4.1.2",
+    "@types/jest": "^23.0.0",
+    "@types/node": "^9.4.7",
+    "chai": "^4.1.2",
+    "estemplate": "^0.5.1",
+    "jest": "^22.4.2",
+    "ts-jest": "^22.4.6",
+    "ts-node": "^5.0.1",
+    "tslint": "^5.6.0",
+    "typescript": "^2"
+  },
+  "files": [
+    "dist/src"
+  ],
+  "jest": {
+    "globals": {
+      "__TS_CONFIG__": "tsconfig.json"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "<rootDir>/src/**"
+    ],
+    "coverageDirectory": "<rootDir>/reports/coverage",
+    "transform": {
+      "\\.(ts)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/test/.*\\.spec\\.ts$"
+  }
+}

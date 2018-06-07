@@ -1,0 +1,16 @@
+version: "2"
+plugins:
+  duplication:
+    enabled: true
+    exclude_patterns:
+    - "**/*.spec.ts"
+    config:
+      languages:
+      - typescript
+  tslint:
+    enabled: true
+    config: tslint.json
+  fixme:
+    enabled: true
+  nodesecurity:
+    enabled: true
