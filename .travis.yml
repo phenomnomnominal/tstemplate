@@ -3,7 +3,7 @@ node_js:
   - "node"
 addons:
   code_climate:
-    repo_token: FOOOOOOOO
+    repo_token: 846ddc4625428fe1230af075e5ccc6e81573429349cd67118e0e25b6a0708545
 script: npm run build
 after_success:
   - npm install -g codeclimate-test-reporter
