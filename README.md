@@ -66,21 +66,27 @@ import { tsquery } from '@phenomnomnominal/tsquery';
 import { tstemplate } from '@phenomnomnominal/tstemplate';
 import { createIdentifier, createPrinter } from 'typescript';
 
-const template = tstemplate.compile('var <%= varName %> = <%= value %> + 1;');
+const template = tstemplate.compile(`
+    var <%= varName %> = <%= value %> + 1;
+    var exampleBoolean = <%= isTrue %>;
+`);
 
 const result1 = template({
     varName: createIdentifier('myVar'),
-    value: tsquery('123', 'NumericLiteral')
+    value: tsquery('123', 'NumericLiteral'),
+    isTrue:  tsquery('true', 'TrueKeyword')
 });
 const result2 = template({
     varName: createIdentifier('otherVar'),
-    value: tsquery('234', 'NumericLiteral')
+    value: tsquery('234', 'NumericLiteral'),
+    isTrue: tsquery('false', 'FalseKeyword')
 });
 
 const printer = createPrinter();
 console.log(printer.printFile(result1)); // var myVar = 123 + 1;
 console.log(printer.printFile(result2)); // var otherVar = 234 + 1;
 ```
+**Note:** For more literals, keywords expressions etc. check those typescript typings: https://github.com/microsoft/TypeScript/blob/master/src/compiler/types.ts 
 
 # Templating syntax:
   * Node substitution: `var x = <%= expr %> + 1;`
